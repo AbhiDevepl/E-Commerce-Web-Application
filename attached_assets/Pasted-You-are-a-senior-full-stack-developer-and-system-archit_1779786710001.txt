@@ -1,0 +1,421 @@
+You are a senior full-stack developer and system architect.
+
+Build a complete full-stack E-Commerce Web Application for a college project.
+
+Project Goal:
+Create a basic online store with product catalog, cart, checkout, user authentication, role-based access, product management, order tracking, backend APIs, and MongoDB database integration.
+
+Final Tech Stack:
+- Frontend: React + Vite + Tailwind CSS + shadcn/ui
+- Routing: React Router DOM
+- Backend: Node.js + Express.js + TypeScript
+- API Style: REST or ts-rest
+- Database: MongoDB
+- ORM/ODM: Mongoose
+- Authentication: JWT + bcrypt.js
+- Validation: Zod
+- Environment Config: dotenv
+- Package Manager: Bun
+
+Important:
+Auth should be custom JWT authentication. Do not use Clerk, Auth.js, Supabase Auth, or Better-Auth.
+Payment gateway is not required. Use Cash on Delivery or Demo Payment.
+Keep the project production-style but simple enough for college submission.
+
+Core Features:
+
+1. Authentication
+Implement:
+- User registration
+- User login
+- JWT token generation
+- Password hashing using bcrypt
+- Protected routes
+- Role-based access control
+
+User roles:
+- Admin
+- User
+
+Admin can:
+- Add products
+- Edit products
+- Delete products
+- View all products
+- View all orders
+- Update order status
+
+User can:
+- Register/login
+- View product catalog
+- View product details
+- Search products
+- Filter products by category
+- Sort products by price
+- Add products to cart
+- Increase/decrease cart quantity
+- Remove products from cart
+- Checkout
+- Place order
+- View own orders
+- Track order status
+
+2. Backend Requirements
+
+Create this backend folder structure:
+
+server/
+  src/
+    config/
+      db.ts
+    models/
+      User.ts
+      Product.ts
+      Order.ts
+    controllers/
+      authController.ts
+      productController.ts
+      orderController.ts
+    middleware/
+      authMiddleware.ts
+      adminMiddleware.ts
+      errorMiddleware.ts
+    routes/
+      authRoutes.ts
+      productRoutes.ts
+      orderRoutes.ts
+    utils/
+      generateToken.ts
+    server.ts
+
+Backend APIs:
+
+Auth APIs:
+- POST /api/auth/register
+- POST /api/auth/login
+- GET /api/auth/profile
+
+Product APIs:
+- GET /api/products
+- GET /api/products/:id
+- POST /api/products
+- PUT /api/products/:id
+- DELETE /api/products/:id
+
+Order APIs:
+- POST /api/orders
+- GET /api/orders/my-orders
+- GET /api/orders/:id
+- GET /api/orders
+- PUT /api/orders/:id/status
+
+Rules:
+- Product create/update/delete APIs must be admin-only.
+- Get all orders and update order status must be admin-only.
+- My orders should return only logged-in user orders.
+- Use proper HTTP status codes.
+- Use centralized error handling.
+- Use Zod validation for request bodies.
+- Use environment variables for MongoDB URI, JWT secret, port, and client URL.
+
+Database Models:
+
+User:
+- name
+- email
+- password
+- role: "admin" or "user"
+- createdAt
+- updatedAt
+
+Product:
+- name
+- description
+- price
+- category
+- stock
+- image
+- createdAt
+- updatedAt
+
+Order:
+- user
+- orderItems:
+  - product
+  - name
+  - image
+  - price
+  - quantity
+- shippingAddress:
+  - address
+  - city
+  - postalCode
+  - country
+- paymentMethod
+- totalPrice
+- orderStatus: Pending, Processing, Shipped, Delivered, Cancelled
+- createdAt
+- updatedAt
+
+3. Frontend Requirements
+
+Create this frontend folder structure:
+
+client/
+  src/
+    components/
+      Navbar.jsx
+      Footer.jsx
+      ProductCard.jsx
+      ProtectedRoute.jsx
+      AdminRoute.jsx
+      Loader.jsx
+      Message.jsx
+    context/
+      AuthContext.jsx
+      CartContext.jsx
+    pages/
+      Home.jsx
+      Products.jsx
+      ProductDetails.jsx
+      Login.jsx
+      Register.jsx
+      Cart.jsx
+      Checkout.jsx
+      MyOrders.jsx
+      OrderDetails.jsx
+      Profile.jsx
+      AdminDashboard.jsx
+      ManageProducts.jsx
+      AddProduct.jsx
+      EditProduct.jsx
+      ManageOrders.jsx
+    services/
+      api.js
+      authService.js
+      productService.js
+      orderService.js
+    utils/
+      formatCurrency.js
+    App.jsx
+    main.jsx
+
+Frontend Pages:
+
+Public:
+- Home
+- Products
+- Product Details
+- Login
+- Register
+
+User:
+- Cart
+- Checkout
+- My Orders
+- Order Details
+- Profile
+
+Admin:
+- Admin Dashboard
+- Manage Products
+- Add Product
+- Edit Product
+- Manage Orders
+
+Frontend Rules:
+- Use React Router DOM.
+- Use Axios for API requests.
+- Store JWT token in localStorage.
+- Store cart in localStorage.
+- Use AuthContext for logged-in user state.
+- Use CartContext for cart state.
+- Add protected routes for logged-in users.
+- Add admin-only routes for admin pages.
+- Show loading states and error messages.
+- Make UI responsive.
+- Use Tailwind CSS and shadcn/ui components.
+- Keep design clean, modern, and beginner-friendly.
+
+4. UI Requirements
+
+Create:
+- Responsive navbar
+- Footer
+- Product cards
+- Product grid
+- Search bar
+- Category filter
+- Price sort
+- Product details page
+- Cart page with quantity controls
+- Checkout form
+- Order success message
+- My orders table
+- Admin dashboard cards
+- Product management table
+- Order management table
+- Forms for add/edit product
+- Empty cart message
+- Error and loading components
+
+5. Security Requirements
+
+Implement:
+- JWT authentication
+- bcrypt password hashing
+- Protected backend routes
+- Admin-only middleware
+- Zod validation
+- Centralized error handling
+- CORS setup
+- dotenv config
+- Do not expose JWT secret
+- Do not store plain text passwords
+
+6. Seed Data
+
+Create sample seed data or instructions for:
+Admin user:
+- email: admin@example.com
+- password: admin123
+
+Normal user:
+- email: user@example.com
+- password: user123
+
+Add at least 8 sample products with:
+- name
+- description
+- price
+- category
+- stock
+- image URL
+
+7. Environment Variables
+
+Create .env.example files.
+
+Backend .env.example:
+PORT=5000
+MONGO_URI=mongodb://localhost:27017/ecommerce_app
+JWT_SECRET=your_jwt_secret_here
+CLIENT_URL=http://localhost:5173
+
+Frontend .env.example:
+VITE_API_URL=http://localhost:5000/api
+
+8. Development Order
+
+Build in this exact order:
+
+Phase 1:
+- Setup backend server
+- Connect MongoDB
+- Add environment variables
+- Add global error handler
+
+Phase 2:
+- Create User, Product, and Order models
+- Create JWT token utility
+- Create auth middleware
+- Create admin middleware
+
+Phase 3:
+- Create auth controller and routes
+- Implement register, login, profile
+
+Phase 4:
+- Create product controller and routes
+- Implement product CRUD
+- Add admin protection
+
+Phase 5:
+- Create order controller and routes
+- Implement place order, my orders, order details, all orders, update order status
+
+Phase 6:
+- Setup frontend
+- Setup React Router
+- Setup Axios API instance
+- Setup AuthContext and CartContext
+
+Phase 7:
+- Build Login/Register/Profile pages
+- Build protected routes and admin routes
+
+Phase 8:
+- Build Home, Products, ProductDetails pages
+- Add search, filter, and sort
+
+Phase 9:
+- Build Cart and Checkout pages
+- Implement place order flow
+
+Phase 10:
+- Build MyOrders and OrderDetails pages
+
+Phase 11:
+- Build AdminDashboard, ManageProducts, AddProduct, EditProduct, ManageOrders pages
+
+Phase 12:
+- Final testing
+- Fix bugs
+- Add README.md
+- Add API documentation
+- Add viva explanation points
+
+9. Testing Checklist
+
+Ensure:
+- User can register
+- User can login
+- JWT token saves correctly
+- User can view products
+- User can search/filter/sort products
+- User can add products to cart
+- User can increase/decrease quantity
+- User can checkout
+- User can place order
+- User can view own orders
+- Admin can login
+- Admin can add products
+- Admin can edit products
+- Admin can delete products
+- Admin can view all orders
+- Admin can update order status
+- Normal user cannot access admin routes
+- Protected APIs reject unauthenticated requests
+
+10. README.md Requirements
+
+Generate a complete README.md with:
+- Project title
+- Project description
+- Features
+- Tech stack
+- Folder structure
+- Installation steps
+- Backend setup
+- Frontend setup
+- Environment variables
+- API endpoints
+- Sample login credentials
+- Screenshots section placeholder
+- Viva explanation points
+- Future scope
+- Conclusion
+
+11. Final Output Requirements
+
+Give complete working code with file paths.
+Do not skip important files.
+Do not give only explanation.
+Generate code phase by phase.
+After each phase, mention:
+- Files created
+- What was implemented
+- Commands to run
+- Next step
+
+Make the code clean, readable, beginner-friendly, and suitable for college submission.

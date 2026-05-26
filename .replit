@@ -1,0 +1,15 @@
+modules = ["nodejs-20", "web"]
+[agent]
+expertMode = true
+stack = "BEST_EFFORT_FALLBACK"
+
+[nix]
+channel = "stable-25_05"
+
+[userenv]
+
+[userenv.development]
+BETTER_AUTH_URL = "https://ff161851-b608-4c20-95c3-27c1d640f9f5-00-2113ti8clxcjg.pike.replit.dev"
+CORS_ORIGIN = "https://ff161851-b608-4c20-95c3-27c1d640f9f5-00-2113ti8clxcjg.pike.replit.dev"
+NODE_ENV = "development"
+VITE_SERVER_URL = "https://ff161851-b608-4c20-95c3-27c1d640f9f5-00-2113ti8clxcjg.pike.replit.dev/api"
