@@ -1,11 +1,4 @@
-import { NextFunction, Response } from "express";
-import { AuthRequest } from "./authMiddleware.js";
-
-export const adminOnly = (
-  req: AuthRequest,
-  res: Response,
-  next: NextFunction
-) => {
+export const adminOnly = (req: any, res: any, next: any) => {
   if (req.user && req.user.role === "admin") {
     next();
   } else {

@@ -1,13 +1,3 @@
-import { createEnv } from "@t3-oss/env-core";
-import { z } from "zod";
-
-type ImportMetaEnvRecord = Record<string, string | boolean | undefined>;
-
-export const env = createEnv({
-  clientPrefix: "VITE_",
-  client: {
-    VITE_API_URL: z.string().default("/api"),
-  },
-  runtimeEnv: (import.meta as ImportMeta & { env: ImportMetaEnvRecord }).env,
-  emptyStringAsUndefined: true,
-});
+export const env = {
+  VITE_API_URL: (import.meta as any).env?.VITE_API_URL || "/api",
+};
