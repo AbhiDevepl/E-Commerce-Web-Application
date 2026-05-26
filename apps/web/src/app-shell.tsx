@@ -1,26 +1,23 @@
 import { Outlet } from "react-router";
-
-import Header from "@/components/header";
-import { ThemeProvider } from "@/components/theme-provider";
-import { Toaster } from "@/components/ui/sonner";
-
-function RoutedLayout() {
-  return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="dark"
-      disableTransitionOnChange
-      storageKey="vite-ui-theme"
-    >
-      <div className="grid h-svh grid-rows-[auto_1fr]">
-        <Header />
-        <Outlet />
-      </div>
-      <Toaster richColors />
-    </ThemeProvider>
-  );
-}
+import { Toaster } from "sonner";
+import { AuthProvider } from "./context/AuthContext";
+import { CartProvider } from "./context/CartContext";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 export default function AppShell() {
-  return <RoutedLayout />;
+  return (
+    <AuthProvider>
+      <CartProvider>
+        <div className="min-h-screen flex flex-col bg-gray-50">
+          <Navbar />
+          <main className="flex-1">
+            <Outlet />
+          </main>
+          <Footer />
+        </div>
+        <Toaster richColors position="top-right" />
+      </CartProvider>
+    </AuthProvider>
+  );
 }

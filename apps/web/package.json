@@ -10,9 +10,8 @@
     "start": "vite"
   },
   "dependencies": {
-    "@E-Commerce-Web-Application/api": "*",
-    "@E-Commerce-Web-Application/auth": "*",
     "@E-Commerce-Web-Application/env": "*",
+    "axios": "^1.7.9",
     "@base-ui/react": "^1.4.1",
     "@fontsource-variable/inter": "^5.2.8",
     "@hookform/resolvers": "^5.2.2",

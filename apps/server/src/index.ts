@@ -1,28 +1,38 @@
-import { auth } from "@E-Commerce-Web-Application/auth";
-import { env } from "@E-Commerce-Web-Application/env/server";
-import { toNodeHandler } from "better-auth/node";
+import "dotenv/config";
 import cors from "cors";
 import express from "express";
+import { connectDB } from "@E-Commerce-Web-Application/db";
+import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
+import authRoutes from "./routes/authRoutes.js";
+import productRoutes from "./routes/productRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
 
 const app = express();
+const PORT = process.env.PORT || 3000;
+const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5000";
 
 app.use(
   cors({
-    origin: env.CORS_ORIGIN,
-    methods: ["GET", "POST", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    origin: [CLIENT_URL, `https://${process.env.REPLIT_DEV_DOMAIN}`],
     credentials: true,
-  }),
+  })
 );
-
-app.all("/api/auth{/*path}", toNodeHandler(auth));
 
 app.use(express.json());
 
 app.get("/", (_req, res) => {
-  res.status(200).send("OK");
+  res.status(200).json({ message: "E-Commerce API is running" });
 });
 
-app.listen(3000, () => {
-  console.log("Server is running on http://localhost:3000");
+app.use("/api/auth", authRoutes);
+app.use("/api/products", productRoutes);
+app.use("/api/orders", orderRoutes);
+
+app.use(notFound);
+app.use(errorHandler);
+
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+  });
 });

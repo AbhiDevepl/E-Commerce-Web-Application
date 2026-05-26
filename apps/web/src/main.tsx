@@ -1,3 +1,4 @@
+import "@fontsource-variable/inter";
 import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router";
 

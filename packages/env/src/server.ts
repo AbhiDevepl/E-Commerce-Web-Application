@@ -4,10 +4,10 @@ import { z } from "zod";
 
 export const env = createEnv({
   server: {
-    DATABASE_URL: z.string().min(1),
-    BETTER_AUTH_SECRET: z.string().min(32),
-    BETTER_AUTH_URL: z.url(),
-    CORS_ORIGIN: z.url(),
+    MONGODB_URL: z.string().min(1),
+    JWT_SECRET: z.string().min(16),
+    CLIENT_URL: z.string().min(1).default("http://localhost:5000"),
+    PORT: z.string().default("3000"),
     NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
   },
   runtimeEnv: process.env,

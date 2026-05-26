@@ -6,7 +6,7 @@ type ImportMetaEnvRecord = Record<string, string | boolean | undefined>;
 export const env = createEnv({
   clientPrefix: "VITE_",
   client: {
-    VITE_SERVER_URL: z.url().default("http://localhost:3000"),
+    VITE_API_URL: z.string().default("/api"),
   },
   runtimeEnv: (import.meta as ImportMeta & { env: ImportMetaEnvRecord }).env,
   emptyStringAsUndefined: true,
