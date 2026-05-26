@@ -1,0 +1,33 @@
+import { initContract } from "@ts-rest/core";
+import { z } from "zod";
+
+const c = initContract();
+
+export const contract = c.router({
+  healthCheck: {
+    method: "GET",
+    path: "/health",
+    responses: {
+      200: z.literal("OK"),
+    },
+  },
+  privateData: {
+    method: "GET",
+    path: "/private",
+    responses: {
+      200: z.object({
+        message: z.string(),
+        user: z.object({
+          id: z.string(),
+          email: z.string(),
+          name: z.string().nullable(),
+        }),
+      }),
+      401: z.object({
+        message: z.string(),
+      }),
+    },
+  },
+});
+
+export type AppContract = typeof contract;

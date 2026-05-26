@@ -1,0 +1,19 @@
+import { client } from "@E-Commerce-Web-Application/db";
+import { env } from "@E-Commerce-Web-Application/env/server";
+import { betterAuth } from "better-auth";
+import { mongodbAdapter } from "better-auth/adapters/mongodb";
+
+export const auth = betterAuth({
+  database: mongodbAdapter(client),
+  trustedOrigins: [env.CORS_ORIGIN],
+  emailAndPassword: {
+    enabled: true,
+  },
+  advanced: {
+    defaultCookieAttributes: {
+      sameSite: "none",
+      secure: true,
+      httpOnly: true,
+    },
+  },
+});

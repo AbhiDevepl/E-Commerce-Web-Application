@@ -1,0 +1,28 @@
+{
+  "name": "@E-Commerce-Web-Application/auth",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "scripts": {},
+  "dependencies": {
+    "@E-Commerce-Web-Application/db": "*",
+    "@E-Commerce-Web-Application/env": "*",
+    "@better-auth/mongo-adapter": "^1.6.11",
+    "better-auth": "^1.6.11",
+    "dotenv": "^17.4.2",
+    "stripe": "^22.1.1",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@E-Commerce-Web-Application/config": "*",
+    "typescript": "^6.0.3"
+  }
+}
