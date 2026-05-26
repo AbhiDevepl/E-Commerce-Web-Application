@@ -7,16 +7,30 @@
     "check-types": "tsc -b",
     "compile": "bun build --compile --minify --sourcemap --bytecode ./src/index.ts --outfile server",
     "dev": "tsx watch src/index.ts",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "migrate:analyze": "node --import tsx/esm src/scripts/analyzeCsv.ts",
+    "migrate:products": "node --import tsx/esm src/scripts/importProducts.ts",
+    "migrate:orders": "node --import tsx/esm src/scripts/importOrders.ts",
+    "migrate:sessions": "node --import tsx/esm src/scripts/importSessions.ts",
+    "migrate:verify": "node --import tsx/esm src/scripts/verifyImport.ts",
+    "migrate:health": "node --import tsx/esm src/scripts/healthCheck.ts",
+    "migrate:all": "node --import tsx/esm src/scripts/importAll.ts",
+    "migrate:reset": "node --import tsx/esm -e \"import mongoose from 'mongoose'; import 'dotenv/config'; const uri = process.env.MONGO_URI || process.env.MONGODB_URL || 'mongodb://localhost:27017/ecommerce_app'; await mongoose.connect(uri); await Promise.all(['products','orders','orderItems','refunds','sessions','pageviews'].map((name)=>mongoose.connection.collection(name).deleteMany({}))); await mongoose.disconnect(); console.log('Migration collections reset complete');\""
   },
   "dependencies": {
     "@E-Commerce-Web-Application/db": "*",
     "@E-Commerce-Web-Application/env": "*",
     "bcryptjs": "^2.4.3",
+    "chalk": "^5.6.2",
     "cors": "^2.8.6",
+    "csv-parser": "^3.2.0",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "fast-csv": "^5.0.5",
+    "fs-extra": "^11.3.2",
     "jsonwebtoken": "^9.0.2",
+    "mongoose": "^9.6.2",
+    "ora": "^8.2.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {
