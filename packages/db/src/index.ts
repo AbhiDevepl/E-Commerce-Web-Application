@@ -10,3 +10,13 @@ export const connectDB = async () => {
     process.exit(1);
   }
 };
+
+// Auth models (better-auth)
+export { User, Session, Account, Verification } from "./models/auth.model";
+
+// App models
+export { Product } from "./models/product.model";
+export type { IProduct } from "./models/product.model";
+
+export { Order } from "./models/order.model";
+export type { IOrder, IOrderItem, IShippingAddress } from "./models/order.model";
